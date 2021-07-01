@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import auth from './firebase';
 
 export default function Login() {
@@ -9,7 +9,7 @@ export default function Login() {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(false);
     const [loader, setLoader] = useState(false);
-     
+    const [mainLoader, setmainLoader] = useState(true);
     // user => user data
     // loading => loading 
     // error => error
@@ -20,19 +20,37 @@ export default function Login() {
             let res = await auth.signInWithEmailAndPassword(email, password);
             setUser(res.user);
             setError(false);
-            setLoader(false)
+            setLoader(false);
         }
         catch{
             setError(true);
             setLoader(false);
         }
+        setEmail("");
+        setPassword("");
     }
+    const handleLogout = async() => {
+        setLoader(true);
+        await auth.signOut();
+        setLoader(false);
+        setUser(null);
+    }
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            setUser(user);
+            setmainLoader(false);
+        });
+    }, []);
+    
     return (
         <>
 
-        {error === true ? <h1>Failed to login</h1>:
+        {mainLoader === true ? <h1>Wait for a second</h1>:
+        error === true ? <h1>Failed to login</h1>:
         loader === true ? <h1>Loading</h1>:
-        user !== null ? <h1>User Logged in {user.uid}</h1>:
+        user !== null ? <h1>User Logged in {user.uid}
+                            <button onClick={handleLogout}>Logout</button>    
+                        </h1>:
             <>
                 <h1>Firebase Login</h1>
 
