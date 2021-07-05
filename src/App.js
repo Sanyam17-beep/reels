@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Login from './component/Login';
 import Feed from './component/Feed';
 import Signup from './component/Signup'
-import AuthProvider from './component/AuthContext';
-import { AuthContext } from './component/AuthContext';
+import AuthProvider from './contexts/AuthContext';
+import { AuthContext } from './contexts/AuthContext';
+
 export default function App() {
     return (
         // <Login></Login>
