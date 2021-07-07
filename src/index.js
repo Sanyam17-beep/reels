@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import Test from "./TestComponent/Test";
-
+import InterSectionObserverDemo from './intersectionobserver/InterSectionObserverDemo'
 ReactDOM.render(
   <React.StrictMode>
-    <App></App>
+    <InterSectionObserverDemo>
+
+    </InterSectionObserverDemo>
+
+    {/* <App></App> */}
     {/* <Test></Test> */}
   </React.StrictMode>,
   document.getElementById('root')
