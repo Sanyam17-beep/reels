@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react'
 export const AuthContext = React.createContext();
 export default function AuthProvider({children}) {
     const [currentUser, setUser] = useState();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     async function login(email, password){
         return await auth.signInWithEmailAndPassword(email, password);

@@ -47,10 +47,10 @@ export default function Signup(props) {
                 let downloadurl = await uploadTaskListener.snapshot.ref.getDownloadURL();
                 database.users.doc(uid).set({
                     email,
-                    useid: uid,
+                    uid,
                     username,
                     createdAt: database.getUserTimeStamp(),
-                    profileurl: downloadurl
+                    photoURL: downloadurl
                 })
                 setLoader(false);
                 props.history.push("/");

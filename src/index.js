@@ -2,17 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Comments from "./component/Comments"
 import reportWebVitals from './reportWebVitals';
-// import Test from "./TestComponent/Test";
 import InterSectionObserverDemo from './intersectionobserver/InterSectionObserverDemo'
 ReactDOM.render(
   <React.StrictMode>
-    <InterSectionObserverDemo>
-
-    </InterSectionObserverDemo>
-
-    {/* <App></App> */}
-    {/* <Test></Test> */}
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

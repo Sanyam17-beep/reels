@@ -4,16 +4,17 @@ import Login from './component/Login';
 import Feed from './component/Feed';
 import Signup from './component/Signup'
 import AuthProvider from './contexts/AuthContext';
+import Profile from './component/Profile';
 import { AuthContext } from './contexts/AuthContext';
 
 export default function App() {
     return (
-        // <Login></Login>
         <AuthProvider>
             <BrowserRouter>
                 <Switch>
                     <Route path="/login" component={Login}></Route>
                     <Route path="/signup" component={Signup}></Route>
+                    <Route path="/profile/:id" component={Profile}></Route>
                     <PrivateRoute path="/" exact abc={Feed}></PrivateRoute>
                 </Switch>
             </BrowserRouter>
