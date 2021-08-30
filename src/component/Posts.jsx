@@ -74,8 +74,25 @@ function Posts({ userData = null }) {
 
   let classes = useStyles();
   // const { signOut, currentUser } = useContext(AuthContext);
-  const [posts, setVideos] = useState([]);
+  const [posts, setPostData] = useState([]);
   const [openId, setOpenId] = useState(null);
+  const [commentData, setComment] = useState({});
+  
+  useEffect(() => {
+    console.log(posts);
+    if (posts.length !== 0){
+      let indexOfTobeUpdated = posts.findIndex((post)=>{
+        return post.pid === commentData.pid;
+      }) 
+      console.log(indexOfTobeUpdated);
+      let postTobeUpdated =  posts[indexOfTobeUpdated];
+      postTobeUpdated.comments = [...postTobeUpdated.comments, commentData.text];
+
+      let postData = [...posts, postTobeUpdated];
+      setPostData(postData);
+    }
+  }, [commentData]);
+
   const handleClickOpen = (id) => {
     setOpenId(id);
   };
@@ -108,7 +125,7 @@ function Posts({ userData = null }) {
             comments
           });
         }
-        setVideos(videosArr);
+        setPostData(videosArr);
       });
     return unsub;
   }, []);
@@ -121,8 +138,9 @@ function Posts({ userData = null }) {
 
       : <div className='videoContainer' id="videoContainer"> 
       {posts.map((post, index) => {
+          console.log(post.comments)
           return (
-            <div>
+            <div key={index}>
               <div className="videos">
                 <Video source={post.videoUrl} id={post.pid} />
                 <div className="fa" style={{ display: "flex" }}>
@@ -200,9 +218,9 @@ function Posts({ userData = null }) {
                         <div className="extra">
                           <div className="likes">
                                 <Likes2 userData={userData} postData={post} />
-                                <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : `${post.likes.length}`}</Typography>
+                                {/* <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : `${post.likes.length}`}</Typography> */}
                           </div>
-                            <AddComment  userData={userData} postData={post}/> 
+                            <AddComment  userData={userData} postData={post} setComment={setComment}/> 
                         </div>
                       </div>
                     </div>

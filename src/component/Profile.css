@@ -40,8 +40,8 @@
 {
     display: flex;
     flex-wrap: wrap;
-    
-    
+    /* flex-direction: row; */
+    /* padding-right: 4%; */
 }
 .u-video
 {

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import Comments from "./component/Comments"
 import reportWebVitals from './reportWebVitals';
-import InterSectionObserverDemo from './intersectionobserver/InterSectionObserverDemo'
+// import InterSectionObserverDemo from './intersectionobserver/InterSectionObserverDemo'
 ReactDOM.render(
   <React.StrictMode>
     <App/>

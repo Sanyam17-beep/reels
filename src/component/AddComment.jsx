@@ -6,7 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Button  from '@material-ui/core/Button';
 import {makeStyles} from "@material-ui/styles";
 
-function AddComment({userData, postData}) {
+function AddComment(props) {
+    const  {userData, postData} = props;
     const useStyles = makeStyles({
         cbtn:{
             marginRight:'1%',
@@ -14,7 +15,7 @@ function AddComment({userData, postData}) {
         },
         
     });
-    console.log(postData.comments, postData.pid);
+    
     const classes = useStyles();
     const [commentText, setText] = useState();
     
@@ -25,13 +26,17 @@ function AddComment({userData, postData}) {
     function handleOnEnter(){
         let obj = {
             text: commentText,
-            username: userData.username
+            username: userData.username,
+            pid: postData.pid
         }
         let prevComments = postData.comments;
         try{
             database.posts.doc(postData.pid).update({
                 "comments": [...prevComments, obj]
             });
+            postData.comments.push(obj);
+
+            props.setComment(obj);
             setText('');
         }
         catch{
